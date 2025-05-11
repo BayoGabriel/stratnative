@@ -215,7 +215,7 @@ const TechnicianDashboard = () => {
   };
 
   const navigateToTaskDetail = (taskId) => {
-    navigation.navigate('taskdetail', { taskId });
+    navigation.navigate('techniciantaskdetail', { taskId });
   };
 
   const StatCard = ({ title, value, icon, color, bgColor }) => (
@@ -649,11 +649,11 @@ const TechnicianDashboard = () => {
           <InboxIcon size={22} color="#9CA3AF" />
           <Text className="text-xs mt-1 text-gray-500 font-geist">Tasks</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('history')} className="items-center px-3">
+        <Pressable onPress={() => navigation.navigate('technicianclockin')} className="items-center px-3">
           <ClockIcon size={22} color="#9CA3AF" />
-          <Text className="text-xs mt-1 text-gray-500 font-geist">History</Text>
+          <Text className="text-xs mt-1 text-gray-500 font-geist">Clock-in</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('profile')} className="items-center px-3">
+        <Pressable onPress={() => navigation.navigate('technicianprofile')} className="items-center px-3">
           <UserIcon size={22} color="#9CA3AF" />
           <Text className="text-xs mt-1 text-gray-500 font-geist">Profile</Text>
         </Pressable>
