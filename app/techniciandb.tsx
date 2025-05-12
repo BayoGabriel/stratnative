@@ -153,7 +153,7 @@ const TechnicianDashboard = () => {
         return <WrenchScrewdriverIcon size={iconSize} color="#3B82F6" />;
       case 'sos':
         return <Image
-          source={require('../assets/emergency.png')}
+          source={require('../assets/stuck.png')}
           style={{ width: 22, height: 22 }}
         />;
       default:
@@ -331,7 +331,7 @@ const TechnicianDashboard = () => {
             </Text>
             
             <Pressable 
-              onPress={() => navigation.navigate('newTask')}
+              onPress={() => navigation.navigate('techniciantasks')}
               className="bg-white/20 self-start rounded-lg px-4 py-2 flex-row items-center mt-1"
             >
               <Text className="text-white font-geist-semibold mr-2">View Schedule</Text>
@@ -645,7 +645,7 @@ const TechnicianDashboard = () => {
           <HomeIcon size={22} color="#3B82F6" />
           <Text className="text-xs mt-1 text-blue-600 font-geist-semibold">Dashboard</Text>
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('tasks')} className="items-center px-3">
+        <Pressable onPress={() => navigation.navigate('techniciantasks')} className="items-center px-3">
           <InboxIcon size={22} color="#9CA3AF" />
           <Text className="text-xs mt-1 text-gray-500 font-geist">Tasks</Text>
         </Pressable>

@@ -2,36 +2,8 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useRef } from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  Animated,
-  Dimensions,
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
-import {
-  ArrowLeftIcon,
-  CalendarIcon,
-  ChatBubbleLeftIcon,
-  CheckCircleIcon,
-  CheckIcon,
-  ClipboardDocumentIcon,
-  ClockIcon,
-  DocumentTextIcon,
-  ExclamationTriangleIcon,
-  InformationCircleIcon,
-  MapPinIcon,
-  PaperAirplaneIcon,
-  UserIcon,
-  WrenchScrewdriverIcon,
-} from 'react-native-heroicons/outline';
+import { ActivityIndicator, Alert, Animated, Dimensions, Image, KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TextInput, View,} from 'react-native';
+import { ArrowLeftIcon, CalendarIcon, ChatBubbleLeftIcon, CheckCircleIcon, CheckIcon,  ClipboardDocumentIcon, ClockIcon, DocumentTextIcon, ExclamationTriangleIcon, InformationCircleIcon, MapPinIcon, PaperAirplaneIcon, UserIcon, WrenchScrewdriverIcon,} from 'react-native-heroicons/outline';
 import { useUser } from './UserContext';
 
 const { width } = Dimensions.get('window');
@@ -505,7 +477,7 @@ const TaskDetail = () => {
       {/* Header */}
       <LinearGradient
         colors={['#ffffff', '#fafafa']}
-        className="pt-14 pb-4 px-5"
+        className="pt-2 pb-4 px-5"
       >
         <View className="flex-row justify-between items-center">
           <View className="flex-row items-center">

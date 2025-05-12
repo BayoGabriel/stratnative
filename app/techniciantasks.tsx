@@ -49,7 +49,7 @@ const TechnicianTasks = () => {
   const [selectedPriority, setSelectedPriority] = useState('all');
   const [sortOrder, setSortOrder] = useState('latest');
 
-  // Animation values
+
   const filterAnimation = useRef(new Animated.Value(-600)).current;
   const listOpacity = useRef(new Animated.Value(0)).current;
   const headerAnimation = useRef(new Animated.Value(0)).current;
@@ -163,7 +163,6 @@ const TechnicianTasks = () => {
 
   const toggleFilters = () => {
     if (showFilters) {
-      // Hide filters
       Animated.spring(filterAnimation, {
         toValue: -600,
         friction: 8,
@@ -284,7 +283,7 @@ const TechnicianTasks = () => {
       >
         <LinearGradient
           colors={['#ffffff', '#fafafa']}
-          className="pt-14 pb-4 px-5"
+          className="pt-2 pb-4 px-5"
         >
           <View className="flex-row justify-between items-center mb-4">
             <Text className="text-2xl font-geist-bold text-gray-800">Tasks</Text>
@@ -623,7 +622,7 @@ const TechnicianTasks = () => {
           elevation: 5,
         }}
       >
-        <Pressable onPress={() => navigation.navigate('techniciandashboard')} className="items-center px-3">
+        <Pressable onPress={() => navigation.navigate('techniciandb')} className="items-center px-3">
           <HomeIcon size={22} color="#9CA3AF" />
           <Text className="text-xs mt-1 text-gray-500 font-geist">Dashboard</Text>
         </Pressable>
