@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "monday",
-    "slug": "monday",
+    "name": "stratolift",
+    "slug": "stratolift",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "monday",
+    "icon": "./assets/stra.jpg",
+    "scheme": "stratolift",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -16,7 +16,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.bayogabr.stratolift"
     },
     "web": {
       "bundler": "metro",
@@ -37,6 +38,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6978d382-000f-44fe-a5a5-1113df7c96b8"
+      }
     }
   }
 }
