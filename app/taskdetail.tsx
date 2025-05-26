@@ -5,10 +5,13 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  KeyboardAvoidingView,
+  Linking,
   Platform,
   StatusBar as RNStatusBar,
   ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -20,10 +23,12 @@ import {
   DocumentTextIcon,
   ExclamationTriangleIcon,
   MapPinIcon,
+  PaperAirplaneIcon,
   PhoneIcon,
   TrashIcon,
   UserCircleIcon,
-  WrenchScrewdriverIcon
+  WrenchScrewdriverIcon,
+  XMarkIcon,
 } from 'react-native-heroicons/outline';
 import { StarIcon } from 'react-native-heroicons/solid';
 import { useUser } from './UserContext';
@@ -38,6 +43,9 @@ const TaskDetailScreen = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [countdown, setCountdown] = useState(null);
+  const [showCommentInput, setShowCommentInput] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   useEffect(() => {
     fetchTaskDetails();
@@ -157,6 +165,42 @@ const TaskDetailScreen = () => {
     );
   };
 
+  const handleSubmitComment = async () => {
+    if (!commentText.trim()) {
+      Alert.alert('Error', 'Please enter a comment');
+      return;
+    }
+
+    try {
+      setSubmittingComment(true);
+      const response = await fetch(`https://stratoliftapp.vercel.app/api/tasks/${taskId}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          updateMessage: commentText.trim(),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to add comment');
+      }
+
+      setTask(data.data);
+      setCommentText('');
+      setShowCommentInput(false);
+      Alert.alert('Success', 'Comment added successfully');
+    } catch (err) {
+      Alert.alert('Error', err.message || 'Failed to add comment');
+    } finally {
+      setSubmittingComment(false);
+    }
+  };
+
   const getIconForTaskType = (type) => {
     switch (type) {
       case 'visit':
@@ -256,9 +300,10 @@ const TaskDetailScreen = () => {
   const canDelete = user && (user.role === 'admin' || (user.role === 'user' && task.createdBy?._id === user._id));
 
   return (
-    <View 
+    <KeyboardAvoidingView 
       className="flex-1 bg-gray-50"
-      >
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    >
       <StatusBar style="dark" />
       
       {/* Header */}
@@ -296,7 +341,7 @@ const TaskDetailScreen = () => {
                 className="w-12 h-12 rounded-full mr-3"
               />
               <View className="flex-1">
-                <Text className="font-bold text-lg">{task.assignedTo.name} {task.assignedTo.lastName}</Text>
+                <Text className="font-bold text-lg text-black">{task.assignedTo.firstName} {task.assignedTo.lastName}</Text>
                 <View className="flex-row items-center">
                   <Text className="text-gray-500 mr-2">✓ Certified</Text>
                   <Text className="text-gray-500">• {task.assignedTo.experience || '5'} years experience</Text>
@@ -321,11 +366,7 @@ const TaskDetailScreen = () => {
             <View className="flex-row mt-4">
               <TouchableOpacity 
                   onPress={() => {
-                  if (task?.assignedTo?.phone) {
-                    Linking.openURL(`tel:${task.assignedTo.phone}`);
-                  } else {
-                    alert('No phone number available');
-                  }
+                  Linking.openURL(`tel:${task.assignedTo.phone}`);
                 }} 
                 className="flex-1 flex-row items-center justify-center py-2 border border-gray-300 rounded-full mr-2">
                 <PhoneIcon size={20} color="#000" />
@@ -500,6 +541,64 @@ const TaskDetailScreen = () => {
             ))}
           </View>
         )}
+
+        {/* Comment Input Section */}
+        {showCommentInput && (
+          <View className="bg-white mx-4 mb-4 p-4 border border-gray-200 rounded-lg">
+            <View className="flex-row justify-between items-center mb-3">
+              <Text className="text-lg font-bold">Add Comment</Text>
+              <TouchableOpacity 
+                onPress={() => {
+                  setShowCommentInput(false);
+                  setCommentText('');
+                }}
+              >
+                <XMarkIcon size={24} color="#6B7280" />
+              </TouchableOpacity>
+            </View>
+            
+            <TextInput
+              value={commentText}
+              onChangeText={setCommentText}
+              placeholder="Enter your comment or update..."
+              multiline
+              numberOfLines={4}
+              className="border border-gray-300 rounded-lg p-3 text-gray-700 mb-3"
+              style={{ textAlignVertical: 'top' }}
+            />
+            
+            <View className="flex-row justify-end">
+              <TouchableOpacity 
+                onPress={() => {
+                  setShowCommentInput(false);
+                  setCommentText('');
+                }}
+                className="mr-3 px-4 py-2 bg-gray-200 rounded-lg"
+              >
+                <Text className="text-gray-600 font-medium">Cancel</Text>
+              </TouchableOpacity>
+              
+              <TouchableOpacity 
+                onPress={handleSubmitComment}
+                disabled={submittingComment || !commentText.trim()}
+                className={`px-4 py-2 rounded-lg flex-row items-center ${
+                  submittingComment || !commentText.trim() 
+                    ? 'bg-gray-300' 
+                    : 'bg-blue-500'
+                }`}
+              >
+                {submittingComment ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <PaperAirplaneIcon size={16} color="#FFFFFF" />
+                )}
+                <Text className="text-white font-medium ml-2">
+                  {submittingComment ? 'Posting...' : 'Post'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        )}
       </ScrollView>
       
       {/* Action Buttons */}
@@ -508,7 +607,7 @@ const TaskDetailScreen = () => {
           <View className="flex-row justify-between">
             {/* Add Comment Button */}
             <TouchableOpacity 
-              onPress={() => navigation.navigate('addcomment', { taskId: task._id })}
+              onPress={() => setShowCommentInput(true)}
               className="flex-1 mr-2 flex-row items-center justify-center bg-gray-100 py-3 rounded-lg"
             >
               <ChatBubbleLeftRightIcon size={20} color="#6B7280" />
@@ -539,7 +638,7 @@ const TaskDetailScreen = () => {
           </TouchableOpacity>
         )}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

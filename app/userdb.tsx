@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StatusBar } from 'expo-status-bar';
@@ -394,7 +395,7 @@ const UserDashboard = () => {
                 source={require('../assets/no-activity.png')}
                 style={{ width: width * 0.25, height: width * 0.25, opacity: 0.8, marginBottom: 16 }}
               />
-              <Text className="text-gray-700 font-geist-semibold mb-1">No active tasks</Text>
+              <Text className="text-gray-700 font-geist-semibold mb-1">No recent history</Text>
               <Text className="text-gray-500 text-center mb-4 font-geist">You don't have any service requests yet</Text>
               <Pressable 
                 onPress={() => navigation.navigate('userreport')}

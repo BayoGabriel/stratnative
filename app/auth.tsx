@@ -12,6 +12,7 @@ const RegistrationForm = () => {
     firstName: '',
     lastName: '',
     address: '',
+    phone: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -34,6 +35,7 @@ const RegistrationForm = () => {
       if (!formData.firstName) return 'First name is required';
       if (!formData.lastName) return 'Last name is required';
       if (!formData.email) return 'Email is required';
+      if (!formData.phone) return 'Phone number is required';
       if (!formData.password) return 'Password is required';
       if (formData.password !== formData.confirmPassword) 
         return 'Passwords do not match';
@@ -148,17 +150,57 @@ const RegistrationForm = () => {
           {activeTab === 'register' ? (
             <View className="flex-1 p-4 w-full justify-between">
               <View className="space-y-4">
-                {['firstName', 'lastName', 'address', 'email'].map((field) => (
-                  <View key={field} className="mb-4">
-                    <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">{field.charAt(0).toUpperCase() + field.slice(1)}</Text>
-                    <TextInput
-                      className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
-                      placeholder={`Enter your ${field}`}
-                      value={formData[field]}
-                      onChangeText={(text) => handleInputChange(field, text)}
-                    />
-                  </View>
-                ))}
+                <View className="mb-4">
+                  <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">First Name</Text>
+                  <TextInput
+                    className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
+                    placeholder="Enter your First Name"
+                    value={formData.firstName}
+                    onChangeText={(text) => handleInputChange('firstName', text)}
+                  />
+                </View>
+                
+                <View className="mb-4">
+                  <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">Last Name</Text>
+                  <TextInput
+                    className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
+                    placeholder="Enter your Last Name"
+                    value={formData.lastName}
+                    onChangeText={(text) => handleInputChange('lastName', text)}
+                  />
+                </View>
+                
+                <View className="mb-4">
+                  <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">Address</Text>
+                  <TextInput
+                    className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
+                    placeholder="Enter your Address"
+                    value={formData.address}
+                    onChangeText={(text) => handleInputChange('address', text)}
+                  />
+                </View>
+                
+                <View className="mb-4">
+                  <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">Phone Number</Text>
+                  <TextInput
+                    className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
+                    placeholder="Enter your Phone Number"
+                    keyboardType="phone-pad"
+                    value={formData.phone}
+                    onChangeText={(text) => handleInputChange('phone', text)}
+                  />
+                </View>
+                
+                <View className="mb-4">
+                  <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">Email</Text>
+                  <TextInput
+                    className="w-full px-4 py-2 border border-gray-300 placeholder:text-[12px] placeholder:font-lato-italic rounded-2xl"
+                    placeholder="Enter your Email"
+                    keyboardType="email-address"
+                    value={formData.email}
+                    onChangeText={(text) => handleInputChange('email', text)}
+                  />
+                </View>
 
                 <View className="mb-4">
                   <Text className="text-black mb-2 font-lato-bold text-[16px] font-[700]">Password</Text>

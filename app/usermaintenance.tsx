@@ -11,6 +11,7 @@ import {
   Platform 
 } from 'react-native';
 import { useNavigation } from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 import { 
   ArrowLeftIcon, 
   CheckIcon, 
@@ -328,13 +329,20 @@ const Maintenance = () => {
                 </View>
               )}
               
-              {/* Map */}
-              <View className="bg-gray-100 rounded-lg mb-6 overflow-hidden h-48">
-                <Image 
-                  source={{ uri: '/api/placeholder/400/200' }} 
-                  className="w-full h-full"
-                  alt="Map" 
+              <View className="bg-white rounded-2xl mb-6 overflow-hidden shadow-sm h-48">
+                <LinearGradient
+                  colors={['rgba(0,0,0,0.5)', 'transparent', 'rgba(0,0,0,0.7)']}
+                  className="absolute w-full h-full z-10"
                 />
+                <Image 
+                  source={require('../assets/911.jpg')} 
+                  className="w-full h-full"
+                  alt="Emergency"
+                />
+                <View className="absolute bottom-4 left-4 z-20">
+                  <Text className="text-white font-bold text-xl">Maintenance Services</Text>
+                  <Text className="text-white opacity-90">Help is on the way</Text>
+                </View>
               </View>
               
               {/* Form */}

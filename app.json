@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "stratolift",
-    "slug": "stratolift",
+    "slug": "monday",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/stra.jpg",
@@ -44,6 +44,7 @@
       "eas": {
         "projectId": "6978d382-000f-44fe-a5a5-1113df7c96b8"
       }
-    }
+    },
+    "owner": "bayogabr"
   }
 }
