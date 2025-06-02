@@ -271,8 +271,6 @@ const UserDashboard = () => {
             </LinearGradient>
           </Pressable>
         </Animated.View>
-
-        {/* Service Request Cards */}
         <View className="px-5 mb-8">
           <Text className="text-lg font-geist-bold text-gray-800 mb-4">Service Requests</Text>
           <View className="flex-row justify-between gap-2">
