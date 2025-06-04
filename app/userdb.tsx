@@ -248,9 +248,9 @@ const UserDashboard = () => {
               colors={['#EC3237', '#F43F5E']}
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 1 }}
-              className="p-5 rounded-2xl"
+              className=""
             >
-              <View className="flex-row justify-between items-center">
+              <View className="flex-row p-5 rounded-2xl justify-between items-center">
                 <View className="flex-row items-center flex-1">
                   <View className="bg-white/20 rounded-full p-3 mr-4">
                   <Image

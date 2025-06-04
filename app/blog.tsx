@@ -1,12 +1,12 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Pressable, SafeAreaView, Text, View, } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { ClockIcon, DocumentTextIcon, HomeIcon, UserIcon } from 'react-native-heroicons/outline';
 import { WebView } from 'react-native-webview';
 const WebPageScreen = () => {
   const navigation = useNavigation();
   return (
-    <SafeAreaView className='flex-col min-h-screen justify-between'>
+    <View className='flex-1 bg-gray-5'>
       <WebView
         source={{ uri: 'http://stratolift.com/blog' }} 
         startInLoadingState
@@ -40,7 +40,7 @@ const WebPageScreen = () => {
             <Text className="text-xs mt-1 text-gray-500 font-geist">Profile</Text>
           </Pressable>
         </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

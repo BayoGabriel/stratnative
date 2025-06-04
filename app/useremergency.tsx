@@ -741,7 +741,7 @@ const Emergency = () => {
             </ScrollView>
             
             {/* Submit Button */}
-            <View className="bg-white p-5 shadow-lg">
+            <View className="px-6">
               <TouchableOpacity 
                 onPress={submitForm}
                 disabled={isLoading}
