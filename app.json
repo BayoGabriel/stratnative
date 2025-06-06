@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "stratolift",
-    "slug": "monday",
+    "name": "StratoLift",
+    "slug": "Stratolift",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/stra.jpg",
