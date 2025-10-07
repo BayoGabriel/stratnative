@@ -89,7 +89,7 @@ export default function StratoliftOnboarding() {
   };
     
   const handleSkip = () => {
-    setCurrentPage(2); // Skip to the last carousel item
+    setCurrentPage(2);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
@@ -106,18 +106,15 @@ export default function StratoliftOnboarding() {
     }
   };
 
-  // Splash screen (Image 1)
   if (showSplash) {
     return (
       <View className="flex-1 items-center justify-center">
-        {/* Background Image */}
         <Image
           source={require('../assets/bg.jpg')}
           className="absolute top-0 left-0 w-full h-full"
           resizeMode="cover"
         />
 
-        {/* Foreground content */}
         <Image
           source={require('../assets/redlogo.png')}
           className="w-full"
@@ -127,7 +124,6 @@ export default function StratoliftOnboarding() {
     );
   }
 
-  // Render dot indicators for the carousel
   const renderDots = () => {
     return (
       <View className="flex-row justify-center gap-3 mt-4">
@@ -143,10 +139,8 @@ export default function StratoliftOnboarding() {
     );
   };
 
-  // Render the carousel screens (Images 2-4)
   return (
     <View className="flex-1 bg-[#f2c2c22f]">
-      {/* Skip button */}
       {currentPage < 2 && (
         <TouchableOpacity
           onPress={handleSkip}
@@ -156,11 +150,9 @@ export default function StratoliftOnboarding() {
         </TouchableOpacity>
       )}
       
-      {/* Carousel content */}
       <View className="flex-1 px-6 pt-24 pb-6">
         {currentPage === 0 && (
           <>
-            {/* Welcome screen - Image 2 */}
             <View className="mb-6">
               <Animated.View style={tiltStyle1}>
                 <TouchableOpacity className="bg-white rounded-xl p-4 flex-row items-center justify-between mb-3 shadow-sm">
@@ -209,7 +201,6 @@ export default function StratoliftOnboarding() {
         
         {currentPage === 1 && (
           <>
-            {/* Report Issues screen - Image 3 */}
             <View className="bg-white rounded-xl p-5 mb-6 shadow-sm">
               <View className="items-center mb-4">
                 <View className="bg-green-500 w-10 h-10 rounded-full items-center justify-center mb-2">
@@ -241,7 +232,6 @@ export default function StratoliftOnboarding() {
         
         {currentPage === 2 && (
           <>
-            {/* Emergency Assistance screen - Image 4 */}
             <View className='p-2 bg-[#EC323733] rounded-xl'>
             <TouchableOpacity className="bg-primary rounded-xl p-4 flex-row items-center justify-between">
               <View className="flex-row items-center">
@@ -268,7 +258,6 @@ export default function StratoliftOnboarding() {
         )}
       </View>
       
-      {/* Bottom button */}
       <View className="px-6 pb-8">
         <TouchableOpacity
           onPress={handleContinue}
