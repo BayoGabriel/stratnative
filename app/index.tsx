@@ -1,9 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TouchableOpacity, Dimensions, Animated, Image } from 'react-native';
-import { ArrowRightIcon, ExclamationTriangleIcon } from 'react-native-heroicons/outline';
-import { CheckIcon } from 'react-native-heroicons/solid';
-import { useRouter } from 'expo-router';
-const { width } = Dimensions.get('window');
+import { useRouter } from "expo-router";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  Dimensions,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  ArrowRightIcon,
+  ExclamationTriangleIcon,
+} from "react-native-heroicons/outline";
+import { CheckIcon } from "react-native-heroicons/solid";
+const { width } = Dimensions.get("window");
 
 export default function StratoliftOnboarding() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,18 +30,18 @@ export default function StratoliftOnboarding() {
     const splashTimer = setTimeout(() => {
       setShowSplash(false);
     }, 2000);
-    
+
     return () => clearTimeout(splashTimer);
   }, []);
-  
+
   // Handle carousel auto-scrolling
   useEffect(() => {
     if (!showSplash && currentPage < 2) {
       timerRef.current = setTimeout(() => {
-        setCurrentPage(prev => prev + 1);
+        setCurrentPage((prev) => prev + 1);
       }, 5000); // 5 seconds between carousel slides
     }
-    
+
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
@@ -46,7 +56,7 @@ export default function StratoliftOnboarding() {
         useNativeDriver: true,
       }).start();
     };
-  
+
     if (currentPage === 0) {
       tilt(tiltAnim1, 3);
     } else if (currentPage === 1) {
@@ -60,34 +70,34 @@ export default function StratoliftOnboarding() {
       {
         rotate: tiltAnim1.interpolate({
           inputRange: [-360, 360],
-          outputRange: ['-360deg', '360deg'],
+          outputRange: ["-360deg", "360deg"],
         }),
       },
     ],
   };
-  
+
   const tiltStyle2 = {
     transform: [
       {
         rotate: tiltAnim2.interpolate({
           inputRange: [-360, 360],
-          outputRange: ['-360deg', '360deg'],
+          outputRange: ["-360deg", "360deg"],
         }),
       },
     ],
   };
-  
+
   const tiltStyle3 = {
     transform: [
       {
         rotate: tiltAnim3.interpolate({
           inputRange: [-360, 360],
-          outputRange: ['-360deg', '360deg'],
+          outputRange: ["-360deg", "360deg"],
         }),
       },
     ],
   };
-    
+
   const handleSkip = () => {
     setCurrentPage(2);
     if (timerRef.current) {
@@ -102,7 +112,7 @@ export default function StratoliftOnboarding() {
         clearTimeout(timerRef.current);
       }
     } else {
-      router.push('/auth');
+      router.push("/auth");
     }
   };
 
@@ -110,13 +120,13 @@ export default function StratoliftOnboarding() {
     return (
       <View className="flex-1 items-center justify-center">
         <Image
-          source={require('../assets/bg.jpg')}
+          source={require("../assets/bg.jpg")}
           className="absolute top-0 left-0 w-full h-full"
           resizeMode="cover"
         />
 
         <Image
-          source={require('../assets/redlogo.png')}
+          source={require("../assets/HI_RES_ICON-4599.png")}
           className="w-full"
           resizeMode="contain"
         />
@@ -131,7 +141,7 @@ export default function StratoliftOnboarding() {
           <View
             key={index}
             className={`h-2 w-2 rounded-full ${
-              currentPage === index ? 'bg-primary' : 'bg-gray-300'
+              currentPage === index ? "bg-primary" : "bg-gray-300"
             }`}
           />
         ))}
@@ -146,10 +156,12 @@ export default function StratoliftOnboarding() {
           onPress={handleSkip}
           className="absolute top-3 right-4 z-20"
         >
-          <Text className="text-primary font-geist-semi-bold text-[16px] font-medium">Skip</Text>
+          <Text className="text-primary font-geist-semi-bold text-[16px] font-medium">
+            Skip
+          </Text>
         </TouchableOpacity>
       )}
-      
+
       <View className="flex-1 px-6 pt-24 pb-6">
         {currentPage === 0 && (
           <>
@@ -166,39 +178,42 @@ export default function StratoliftOnboarding() {
                 </TouchableOpacity>
               </Animated.View>
               <Animated.View style={tiltStyle2}>
-              <TouchableOpacity className="bg-white rounded-xl p-4 flex-row items-center justify-between mb-3 shadow-sm">
-                <View className="flex-row items-center">
-                  <View className="w-8 h-8 rounded-full bg-blue-100 items-center justify-center mr-3">
-                    <Text className="text-blue-500">🔧</Text>
+                <TouchableOpacity className="bg-white rounded-xl p-4 flex-row items-center justify-between mb-3 shadow-sm">
+                  <View className="flex-row items-center">
+                    <View className="w-8 h-8 rounded-full bg-blue-100 items-center justify-center mr-3">
+                      <Text className="text-blue-500">🔧</Text>
+                    </View>
+                    <Text className="text-base font-medium">Maintenance</Text>
                   </View>
-                  <Text className="text-base font-medium">Maintenance</Text>
-                </View>
-                <ArrowRightIcon color="#000" size={16} />
-              </TouchableOpacity>
+                  <ArrowRightIcon color="#000" size={16} />
+                </TouchableOpacity>
               </Animated.View>
               <Animated.View style={tiltStyle3}>
-              <TouchableOpacity className="bg-white rounded-xl p-4 flex-row items-center justify-between mb-3 shadow-sm">
-                <View className="flex-row items-center">
-                  <View className="w-8 h-8 rounded-full bg-yellow-100 items-center justify-center mr-3">
-                    <ExclamationTriangleIcon color="#ffcc00" size={20} />
+                <TouchableOpacity className="bg-white rounded-xl p-4 flex-row items-center justify-between mb-3 shadow-sm">
+                  <View className="flex-row items-center">
+                    <View className="w-8 h-8 rounded-full bg-yellow-100 items-center justify-center mr-3">
+                      <ExclamationTriangleIcon color="#ffcc00" size={20} />
+                    </View>
+                    <Text className="text-base font-medium">Report Issue</Text>
                   </View>
-                  <Text className="text-base font-medium">Report Issue</Text>
-                </View>
-                <ArrowRightIcon color="#000" size={16} />
-              </TouchableOpacity>
+                  <ArrowRightIcon color="#000" size={16} />
+                </TouchableOpacity>
               </Animated.View>
             </View>
-            
+
             <View className="mt-auto px-4 mb-10">
-              <Text className="text-[25px] font-lato-bold text-center font-bold">Welcome to Stratolift</Text>
+              <Text className="text-[25px] font-lato-bold text-center font-bold">
+                Welcome to StratoLift
+              </Text>
               <Text className="text-black mt-2 mb-6 text-center font-lato text-[16px]">
-                Effortlessly manage elevator service requests, schedule appointments, and get real-time updates.
+                Effortlessly manage elevator service requests, schedule
+                appointments, and get real-time updates.
               </Text>
               {renderDots()}
             </View>
           </>
         )}
-        
+
         {currentPage === 1 && (
           <>
             <View className="bg-white rounded-xl p-5 mb-6 shadow-sm">
@@ -211,44 +226,55 @@ export default function StratoliftOnboarding() {
                   Your elevator emergency has been reported successfully
                 </Text>
               </View>
-              
+
               <View className="bg-gray-100 rounded-lg p-3 flex-row items-center">
                 <View className="w-8 h-8 rounded-full bg-red-100 items-center justify-center mr-2">
-                  <Image source={require("../assets/stuck.png")}/>
+                  <Image source={require("../assets/stuck.png")} />
                 </View>
-                <Text className="text-[14px] font-lato-black">Elevator is stuck or not moving</Text>
+                <Text className="text-[14px] font-lato-black">
+                  Elevator is stuck or not moving
+                </Text>
               </View>
             </View>
-            
+
             <View className="mt-auto px-4 mb-10">
-              <Text className="text-[25px] font-lato-bold text-center font-bold">Report Issues Instantly</Text>
+              <Text className="text-[25px] font-lato-bold text-center font-bold">
+                Report Issues Instantly
+              </Text>
               <Text className="text-black mt-2 mb-6 text-center font-lato text-[16px]">
-                Easily submit service request and upload photos for faster resolution.
+                Easily submit service request and upload photos for faster
+                resolution.
               </Text>
               {renderDots()}
             </View>
           </>
         )}
-        
+
         {currentPage === 2 && (
           <>
-            <View className='p-2 bg-[#EC323733] rounded-xl'>
-            <TouchableOpacity className="bg-primary rounded-xl p-4 flex-row items-center justify-between">
-              <View className="flex-row items-center">
-                <View className="w-8 h-8 rounded-[50%] bg-[#fa9b9b] items-center justify-center mr-3">
-                  <Image source={require("../assets/emergency.png")} />
+            <View className="p-2 bg-[#EC323733] rounded-xl">
+              <TouchableOpacity className="bg-primary rounded-xl p-4 flex-row items-center justify-between">
+                <View className="flex-row items-center">
+                  <View className="w-8 h-8 rounded-[50%] bg-[#fa9b9b] items-center justify-center mr-3">
+                    <Image source={require("../assets/emergency.png")} />
+                  </View>
+                  <View className="">
+                    <Text className="text-white font-bold font-lato-bold text-[18px]">
+                      Emergency
+                    </Text>
+                    <Text className="text-white font-lato-black mt-1 text-[14px]">
+                      Report an issue immediately
+                    </Text>
+                  </View>
                 </View>
-                <View className=''>
-                  <Text className="text-white font-bold font-lato-bold text-[18px]">Emergency</Text>
-                  <Text className="text-white font-lato-black mt-1 text-[14px]">Report an issue immediately</Text>
-                </View>
-              </View>
-              <ArrowRightIcon color="white" size={16} />
-            </TouchableOpacity>
+                <ArrowRightIcon color="white" size={16} />
+              </TouchableOpacity>
             </View>
-            
+
             <View className="mt-auto px-4 mb-10">
-              <Text className="text-[25px] font-lato-bold text-center font-bold">Emergency Assistance at Your Fingertips</Text>
+              <Text className="text-[25px] font-lato-bold text-center font-bold">
+                Emergency Assistance at Your Fingertips
+              </Text>
               <Text className="text-black mt-2 mb-6 text-center font-lato text-[16px]">
                 Quickly request help during elevator emergencies.
               </Text>
@@ -257,7 +283,7 @@ export default function StratoliftOnboarding() {
           </>
         )}
       </View>
-      
+
       <View className="px-6 pb-8">
         <TouchableOpacity
           onPress={handleContinue}
