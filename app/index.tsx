@@ -1,3 +1,4 @@
+import { App_Name } from "@/lib/appName";
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -203,7 +204,7 @@ export default function StratoliftOnboarding() {
 
             <View className="mt-auto px-4 mb-10">
               <Text className="text-[25px] font-lato-bold text-center font-bold">
-                Welcome to StratoLift
+                Welcome to {App_Name}
               </Text>
               <Text className="text-black mt-2 mb-6 text-center font-lato text-[16px]">
                 Effortlessly manage elevator service requests, schedule

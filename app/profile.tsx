@@ -27,6 +27,7 @@ import {
   UserIcon
 } from 'react-native-heroicons/outline';
 import { useUser } from './UserContext';
+import { App_Name } from '@/lib/appName';
 
 const { width } = Dimensions.get('window');
 
@@ -60,7 +61,7 @@ const UserProfile = () => {
     setTimeout(() => {
       setElevatorData({
         elevatorId: user?.elevator || 'EL-1234',
-        model: 'StratoLift Premium',
+        model: `${App_Name} Premium`,
         installDate: '2023-06-15',
         lastInspection: '2025-03-22',
         nextInspection: '2025-09-22',
